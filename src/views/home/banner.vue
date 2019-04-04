@@ -41,4 +41,6 @@ export default {
   height: 100%;
   img
     height: 358px;
+.m-banner/deep/ .ivu-carousel-dots.ivu-carousel-dots-inside
+  z-index: 1;
 </style>
