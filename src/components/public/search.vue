@@ -1,9 +1,15 @@
 <template>
-  <div class="m-search clearfix">
+  <div class="m-search clearfix" :class="{ 'fixed': scroll>370, 'animation': scroll>200 && scroll<370 }">
     <div class="content clearfix">
       <div class="logo fl"></div>
       <div class="nav-part fl">
-        <slot name="navMenu"></slot>
+        <div class="menu-container">
+          <span>分类</span>
+          <span class="icon down-icon"></span>
+          <div class="menu-box">
+            <m-menu/>
+          </div>
+        </div>
       </div>
       <ul class="tab-list fl">
         <li class="tab-item fl">限时抢购</li>
@@ -24,11 +30,25 @@
   </div>
 </template>
 <script>
+import MMenu from './menu'
 export default {
   data () {
     return {
-      isFocus: false
+      isFocus: false,
+      scroll: 0
     }
+  },
+  mounted () {
+    window.addEventListener('scroll', this.scrollTop)
+  },
+  methods: {
+    scrollTop () {
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      this.scroll = scrollTop
+    }
+  },
+  components: {
+    MMenu
   }
 }
 </script>
@@ -40,6 +60,26 @@ export default {
   margin-top: 20px;
   margin-bottom: 5px;
   background-color: #fff;
+  &.animation
+    width: 100%;
+    top: -51px;
+    margin-top: 0px;
+    border-bottom: 0;
+    opacity: 0;
+  &.fixed
+    position: fixed;
+    width: 100%;
+    top: 0;
+    margin-top: 0px;
+    border-bottom: 1px solid #eee;
+    opacity: 1;
+    transition: all .3s ease;
+    .nav-part
+      &:hover
+        .menu-box
+          display: block !important;
+      .menu-container
+        display: inline-block !important;
   .content
     position: relative;
     padding-right: 40px;
@@ -56,6 +96,29 @@ export default {
       width: 60px;
       height: 51px;
       line-height: 51px;
+      .menu-container
+        display: none;
+        padding: 0 5px;
+        vertical-align: middle;
+        width: 58px;
+        height: 24px;
+        line-height: 24px;
+        border: 1px solid #efefef;
+        font-size: 14px;
+        cursor: pointer;
+      .icon.down-icon
+        top: 12px;
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-position: 0 -1662px;
+      .menu-box
+        display: none;
+        width: 100%;
+        left: 0;
+        right: 0;
+        position: absolute;
+        top: 100%;
     .tab-list
       width: 420px;
       overflow: hidden;
@@ -91,7 +154,7 @@ export default {
         width: 246px;
         padding-left: 35px;
         padding-top: 9px;
-        height: 42px;
+        height: 43px;
         .link
           position: absolute;
           left: -4px;

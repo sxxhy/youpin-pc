@@ -53,6 +53,9 @@ input {
     content: '';
     clear: both;
 }
+.clearfix {
+    *zoom: 1;
+}
 img {
     border-radius: 2px;
 }

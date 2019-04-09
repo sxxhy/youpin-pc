@@ -14,6 +14,16 @@ export default new Router({
     {
       path: '/',
       redirect: '/home'
+    },
+    {
+      path: '/category/:firstId/:secondId',
+      name: 'category',
+      component: () => import(/* webpackChunkName: "category" */ '../views/goodsList/index.vue')
+    },
+    {
+      path: '/detail/:id',
+      name: 'detail',
+      component: () => import(/* webpackChunkName: "detail" */ '../views/detail/index.vue')
     }
   ]
 })

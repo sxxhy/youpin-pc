@@ -15,9 +15,9 @@
       <div class="detail-group" v-for="(item,index) of getMenu" :key="index">
         <p class="title">{{item.title}}</p>
         <ul class="detail-list">
-          <li class="detail-item" v-for="(item,index) of item.child" :key="index">
-            <img :src="item.img">
-            <span>{{item.name}}</span>
+          <li class="detail-item" v-for="(item1,index) of item.child" :key="index" @click="toDetail(item.firstId,item1.secondId)">
+            <img :src="item1.img">
+            <span>{{item1.name}}</span>
           </li>
         </ul>
       </div>
@@ -34,177 +34,179 @@ export default {
           name2: '家用电器',
           child: [{
             title: '服装配饰',
+            firstId: 1,
             child: [{
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 1
+              secondId: 1
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 2
+              secondId: 2
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 3
+              secondId: 3
             }]
           }, {
             title: '服装配饰',
+            firstId: 2,
             child: [{
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 1
+              secondId: 1
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 2
+              secondId: 2
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 3
+              secondId: 3
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 1
+              secondId: 1
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 2
+              secondId: 2
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 3
+              isecondIdd: 3
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 1
+              secondId: 1
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 2
+              secondId: 2
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 3
+              secondId: 3
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 1
+              secondId: 1
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 2
+              secondId: 2
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 3
+              secondId: 3
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 1
+              secondId: 1
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 2
+              secondId: 2
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 3
+              secondId: 3
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 1
+              secondId: 1
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 2
+              secondId: 2
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 3
+              secondId: 3
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 1
+              secondId: 1
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 2
+              secondId: 2
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 3
+              secondId: 3
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 1
+              secondId: 1
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 2
+              secondId: 2
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 3
+              secondId: 3
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 1
+              secondId: 1
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 2
+              secondId: 2
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 3
+              secondId: 3
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 1
+              secondId: 1
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 2
+              secondId: 2
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 3
+              secondId: 3
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 1
+              secondId: 1
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 2
+              secondId: 2
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 3
+              secondId: 3
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 1
+              secondId: 1
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 2
+              secondId: 2
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 3
+              secondId: 3
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 1
+              secondId: 1
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 2
+              secondId: 2
             }, {
               img: 'https://img.youpin.mi-img.com/miio_album_pics/fb758355288b1ed31fea86d0aab3b9f9.png?_s=ks3',
               name: '销量榜单',
-              id: 3
+              secondId: 3
             }]
           }]
         },
@@ -213,33 +215,35 @@ export default {
           name2: '家用电器',
           child: [{
             title: '服装配饰',
+            firstId: 3,
             child: [{
               img: 'https://shop.io.mi-img.com/app/shop/img?id=shop_988f6e0a59bb82f10391368db740148e.jpeg&w=480&h=480',
               name: '销量榜单',
-              id: 1
+              secondId: 1
             }, {
               img: 'https://shop.io.mi-img.com/app/shop/img?id=shop_988f6e0a59bb82f10391368db740148e.jpeg&w=480&h=480',
               name: '销量榜单',
-              id: 2
+              secondId: 2
             }, {
               img: 'https://shop.io.mi-img.com/app/shop/img?id=shop_988f6e0a59bb82f10391368db740148e.jpeg&w=480&h=480',
               name: '销量榜单',
-              id: 3
+              secondId: 3
             }]
           }, {
             title: '服装配饰',
+            firstId: 4,
             child: [{
               img: 'https://shop.io.mi-img.com/app/shop/img?id=shop_988f6e0a59bb82f10391368db740148e.jpeg&w=480&h=480',
               name: '销量榜单',
-              id: 1
+              secondId: 1
             }, {
               img: 'https://shop.io.mi-img.com/app/shop/img?id=shop_988f6e0a59bb82f10391368db740148e.jpeg&w=480&h=480',
               name: '销量榜单',
-              id: 2
+              secondId: 2
             }, {
               img: 'https://shop.io.mi-img.com/app/shop/img?id=shop_988f6e0a59bb82f10391368db740148e.jpeg&w=480&h=480',
               name: '销量榜单',
-              id: 3
+              secondId: 3
             }]
           }]
         },
@@ -291,6 +295,9 @@ export default {
     closeMenu () {
       let self = this
       self.isShow = false
+    },
+    toDetail (fid, sid) {
+      this.$router.push(`/category/${fid}/${sid}`)
     }
   }
 }

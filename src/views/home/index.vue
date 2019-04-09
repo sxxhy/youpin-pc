@@ -5,7 +5,7 @@
       <m-banner/>
     </div>
     <m-hero/>
-    <m-section class="m-h-crowdfounding" v-for="(item,index) of 3" :key="index">
+    <m-section class="m-h-crowdfounding" v-for="(item,index) of 4" :key="index">
       <span slot="subtitle" class="subtitle">永远好奇 永远年轻</span>
       <div slot="mHContainer" v-if="index===0">
         <m-crowdfounding :index="index"/>
@@ -14,9 +14,13 @@
         <m-new-goods/>
       </div>
       <div slot="mHContainer" v-if="index===2">
-        222222
+        <m-new-goods/>
+      </div>
+      <div slot="mHContainer" v-if="index===3">
+        <m-new-goods/>
       </div>
     </m-section>
+    <m-recommend/>
   </div>
 </template>
 <script>
@@ -26,6 +30,7 @@ import MHero from './hero'
 import MSection from './section'
 import MCrowdfounding from './crowdfounding'
 import MNewGoods from './newGoods'
+import MRecommend from './recommend'
 export default {
   components: {
     MMenu,
@@ -33,7 +38,8 @@ export default {
     MHero,
     MSection,
     MCrowdfounding,
-    MNewGoods
+    MNewGoods,
+    MRecommend
   }
 }
 </script>
