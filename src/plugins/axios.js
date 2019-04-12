@@ -1,61 +1,61 @@
-"use strict";
+import axios from 'axios'
 
-import Vue from 'vue';
-import axios from "axios";
-
-// Full config:  https://github.com/axios/axios#request-config
-// axios.defaults.baseURL = process.env.baseURL || process.env.apiUrl || '';
-// axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
-let config = {
-  // baseURL: process.env.baseURL || process.env.apiUrl || ""
-  // timeout: 60 * 1000, // Timeout
-  // withCredentials: true, // Check cross-site Access-Control
-};
-
-const _axios = axios.create(config);
-
-_axios.interceptors.request.use(
-  function(config) {
-    // Do something before request is sent
-    return config;
+const http = {
+  get: function (url) {
+    return new Promise((resolve, reject) => {
+      axios.get(process.env.VUE_APP_API_URL + url)
+        .then((response) => {
+          resolve(response.data)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
   },
-  function(error) {
-    // Do something with request error
-    return Promise.reject(error);
-  }
-);
-
-// Add a response interceptor
-_axios.interceptors.response.use(
-  function(response) {
-    // Do something with response data
-    return response;
+  post: function (url, params) {
+    return new Promise((resolve, reject) => {
+      axios.post(process.env.VUE_APP_API_URL + url, params)
+        .then((response) => {
+          resolve(response.data)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
   },
-  function(error) {
-    // Do something with response error
-    return Promise.reject(error);
+  load: function (url) {
+    return new Promise((resolve, reject) => {
+      // Object.assign(params)
+      axios.get(url)
+        .then((response) => {
+          resolve(response.data)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
+  orderpost: function (url, params) {
+    return new Promise((resolve, reject) => {
+      axios.post(process.env.VUE_APP_ORDER_URL + url, params)
+        .then((response) => {
+          resolve(response.data)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
+  post1: function (url, params) {
+    return new Promise((resolve, reject) => {
+      axios.post(process.env.VUE_APP_ORDER_URL + url, params)
+        .then((response) => {
+          resolve(response.data)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
   }
-);
-
-Plugin.install = function(Vue, options) {
-  Vue.axios = _axios;
-  window.axios = _axios;
-  Object.defineProperties(Vue.prototype, {
-    axios: {
-      get() {
-        return _axios;
-      }
-    },
-    $axios: {
-      get() {
-        return _axios;
-      }
-    },
-  });
-};
-
-Vue.use(Plugin)
-
-export default Plugin;
+}
+export default http

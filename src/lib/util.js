@@ -31,3 +31,18 @@ export const cartList = function (arr1, arr2, name) {
   }
   return orderGoods
 }
+
+// menu
+export const menuReset = function (arr) { // 获取的菜单数据重组
+  let setArr = []
+  let leng = 0
+  if (arr.length % 2 === 0) {
+    leng = arr.length / 2
+  } else leng = (arr.length - 1) / 2
+  for (let i = 0; i < leng; i++) {
+    setArr[i] = []
+    setArr[i].push(arr[2 * i])
+    setArr[i].push(arr[2 * i + 1])
+  }
+  return setArr
+}

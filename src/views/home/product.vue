@@ -31,7 +31,7 @@ export default {
 
 <style lang="sass" scoped>
 .m-prodct
-  width: 264px;
+  width: 266px;
   padding-bottom: 0;
   margin-bottom: 5px;
   border: 1px solid #e7e7e7;
@@ -41,6 +41,9 @@ export default {
   transition: all .4s;
   cursor: pointer;
   text-align: center;
+  box-sizing: border-box;
+  &:nth-child(4n+1)
+    margin-left: 0 !important;
   &:hover
     box-shadow: 0 2px 20px rgba(0,0,0,.1);
     transform: translate3d(0,-2px,0);
@@ -53,6 +56,7 @@ export default {
       height: 198px;
       overflow: hidden;
       padding: 45px 70px 28px;
+      box-sizing: border-box;
       img
         height: 125px;
         width: 125px;

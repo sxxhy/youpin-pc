@@ -31,6 +31,7 @@ import MSection from './section'
 import MCrowdfounding from './crowdfounding'
 import MNewGoods from './newGoods'
 import MRecommend from './recommend'
+import { getHomeInfo } from '../../service/index'
 export default {
   components: {
     MMenu,
@@ -40,6 +41,9 @@ export default {
     MCrowdfounding,
     MNewGoods,
     MRecommend
+  },
+  async created () {
+    console.log(await getHomeInfo())
   }
 }
 </script>
