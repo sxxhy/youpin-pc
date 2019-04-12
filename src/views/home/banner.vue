@@ -4,7 +4,7 @@
         <CarouselItem v-for="(item,index) of bannerList" :key="index">
             <div class="demo-carousel">
               <a href="#">
-                <img :src="item.img">
+                <img :src="imgBaseURL + item.head_img">
               </a>
             </div>
         </CarouselItem>
@@ -16,21 +16,10 @@
 export default {
   data () {
     return {
-      value: 0,
-      bannerList: [{
-        img: 'https://img.youpin.mi-img.com/youpinoper/5eacc9e7032b1f591bfdf7ec1ad53799.jpg?id=&w=1080&h=450',
-        id: 1
-      },
-      {
-        img: 'https://img.youpin.mi-img.com/youpinoper/5eacc9e7032b1f591bfdf7ec1ad53799.jpg?id=&w=1080&h=450',
-        id: 2
-      },
-      {
-        img: 'https://img.youpin.mi-img.com/youpinoper/5eacc9e7032b1f591bfdf7ec1ad53799.jpg?id=&w=1080&h=450',
-        id: 3
-      }]
+      value: 0
     }
-  }
+  },
+  props: ['bannerList']
 }
 </script>
 

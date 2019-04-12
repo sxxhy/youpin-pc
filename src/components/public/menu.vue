@@ -3,21 +3,23 @@
     <ul class="menu-list">
       <li class="menu-item" v-for="(item,index) of menuList" :key="index" @mouseenter="showMenu(index)" @mouseleave="closeMenu">
         <span>
-          <a href="#">{{item[0].name}}</a>
+          <router-link :to="`/category/${item[0].id}`">{{item[0].name}}</router-link>
         </span>
         <span>
           <span> / </span>
-          <a href="#">{{item[1].name}}</a>
+          <router-link :to="`/category/${item[1].id}`">{{item[1].name}}</router-link>
         </span>
       </li>
     </ul>
     <div class="menu-detail" v-show="isShow" @mouseenter="isShow=true" @mouseleave="isShow=false">
       <div class="detail-group" v-for="(item,index) of getMenu" :key="index">
-        <p class="title">{{item.title}}</p>
+        <p class="title">{{item.name}}</p>
         <ul class="detail-list">
-          <li class="detail-item" v-for="(item1,index) of item.child" :key="index" @click="toDetail(item.firstId,item1.secondId)">
-            <img :src="item1.img">
-            <span>{{item1.name}}</span>
+          <li class="detail-item" v-for="(item1,index) of item.subclass" :key="index">
+            <a :href="`/category/${item.id}#secondId${item1.id}`">
+              <img :src="imgBaseURL + item1.class_img">
+              <span>{{item1.name}}</span>
+            </a>
           </li>
         </ul>
       </div>
@@ -40,7 +42,7 @@ export default {
     getMenu () {
       return this.menuList.filter((item, index) => {
         return index === this.menuIndex
-      })[0].child
+      })[0]
     }
   },
   methods: {
@@ -51,9 +53,6 @@ export default {
     closeMenu () {
       let self = this
       self.isShow = false
-    },
-    toDetail (fid, sid) {
-      this.$router.push(`/category/${fid}/${sid}`)
     }
   },
   created () {
@@ -72,6 +71,10 @@ export default {
   z-index: 2;
   .menu-list
     overflow: hidden;
+    overflow-y: scroll;
+    height: 358px;
+    &::-webkit-scrollbar
+      display: none;
     .menu-item
       width: 100%;
       padding: 0 30px;

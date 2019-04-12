@@ -9,3 +9,8 @@ export function getSiteInfo () {
   let url = 'basic'
   return http.get(url)
 }
+
+export function getGoodsList (id) {
+  let url = `class/${id}`
+  return http.get(url)
+}

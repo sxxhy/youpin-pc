@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -16,7 +16,7 @@ export default new Router({
       redirect: '/home'
     },
     {
-      path: '/category/:firstId/:secondId',
+      path: '/category/:id',
       name: 'category',
       component: () => import(/* webpackChunkName: "category" */ '../views/goodsList/index.vue')
     },
@@ -37,3 +37,15 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  // chrome
+  document.body.scrollTop = 0
+  // firefox
+  document.documentElement.scrollTop = 0
+  // safari
+  window.pageYOffset = 0
+  next()
+})
+
+export default router

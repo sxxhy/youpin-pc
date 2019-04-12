@@ -1,14 +1,14 @@
 <template>
   <div class="m-pro-item">
     <div class="pro-img">
-      <img :src="goodInfo.img">
+      <img :src="imgBaseURL + goodInfo.head_imgs">
     </div>
-    <p class="pro-info">{{goodInfo.name}}</p>
-    <p class="pro-desc">{{goodInfo.title}}</p>
+    <p class="pro-info">{{goodInfo.sitename}}</p>
+    <p class="pro-desc">{{goodInfo.promotion_name1}}</p>
     <p class="pro-price">
       <span class="pro-unit">{{goodInfo.money}}</span>
       <span class="price">{{goodInfo.price}}</span>
-      <span class="m-sale-tag">{{goodInfo.tag}}</span>
+      <span class="m-sale-tag" v-if="goodInfo.tag">{{goodInfo.tag}}</span>
     </p>
   </div>
 </template>

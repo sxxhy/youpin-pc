@@ -2,10 +2,10 @@
   <div class="m-new-goods content">
     <div class="swiper">
       <div class="slide" ref="slide">
-        <div class="item" v-for="(item,index) of goodsList" :key="index" style="width: 266px;margin-right: 5px;">
-          <img :src="item.img">
+        <div class="item" v-for="(item,index) of goodsList" :key="index" style="width: 266px;margin-right: 5px;" @click="goDetail(item.type_id, item.classgoods_id)">
+          <img :src="imgBaseURL + item.head_imgs">
           <div class="info">
-            <p class="pro-info">{{item.name}}</p>
+            <p class="pro-info">{{item.sitename}}</p>
             <p class="pro-desc">{{item.title}}</p>
             <p class="pro-price">
               <span class="pro-unit">{{item.money}}</span>
@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="prev icon" @click="prev()" :class="this.count===0 ? 'disabled' : ''"></div>
-      <div class="next icon" @click="next()" :class="this.count===this.goodsList.length - 4 ? 'disabled' : ''"></div>
+      <div class="next icon" @click="next()" :class="this.count===this.goodsList.length - 4 || this.goodsList.length < 4 ? 'disabled' : ''"></div>
     </div>
   </div>
 </template>
@@ -25,62 +25,6 @@
 export default {
   data () {
     return {
-      goodsList: [{
-        img: 'https://img.youpin.mi-img.com/goods/4ea30fd779f29632d86815df85625fd3.jpg',
-        id: 1,
-        name: '智能浴霸',
-        title: '米家智能联动，支持小爱同学，进口直流无刷电机，8合1浴霸，开机即出热风，智能预约',
-        money: '¥',
-        price: '799'
-      },
-      {
-        img: 'https://img.youpin.mi-img.com/goods/dd3a2d5b6aad69cefe02de02cd4d5d8e.jpg',
-        id: 2,
-        name: '智能浴霸',
-        title: '米家智能联动，支持小爱同学，进口直流无刷电机，8合1浴霸，开机即出热风，智能预约',
-        money: '¥',
-        price: '799'
-      },
-      {
-        img: 'https://img.youpin.mi-img.com/goods/80056ae26195e9bea495162f4c13564a.jpg',
-        id: 3,
-        name: '智能浴霸',
-        title: '米家智能联动，支持小爱同学，进口直流无刷电机，8合1浴霸，开机即出热风，智能预约',
-        money: '¥',
-        price: '799'
-      },
-      {
-        img: 'https://img.youpin.mi-img.com/goods/2a8e76e15aabdbb4d8cab07064255191.jpg',
-        id: 4,
-        name: '智能浴霸',
-        title: '米家智能联动，支持小爱同学，进口直流无刷电机，8合1浴霸，开机即出热风，智能预约',
-        money: '¥',
-        price: '799'
-      },
-      {
-        img: 'https://img.youpin.mi-img.com/goods/5988ead69bda7742abf6e6813e9445bd.jpg',
-        id: 5,
-        name: '智能浴霸',
-        title: '米家智能联动，支持小爱同学，进口直流无刷电机，8合1浴霸，开机即出热风，智能预约',
-        money: '¥',
-        price: '799'
-      },
-      {
-        img: 'https://img.youpin.mi-img.com/goods/809265b96e431318d860112a2824f27c.jpg',
-        id: 6,
-        name: '智能浴霸',
-        title: '米家智能联动，支持小爱同学，进口直流无刷电机，8合1浴霸，开机即出热风，智能预约',
-        money: '¥',
-        price: '799'
-      },
-      {
-        img: 'https://img.youpin.mi-img.com/pic_square/102532_54b8e8267f64f8ebb33d180c17a17aaa.png',
-        id: 7,
-        name: '智能浴霸',
-        title: '米家智能联动，支持小爱同学，进口直流无刷电机，8合1浴霸，开机即出热风，智能预约',
-        money: '¥',
-        price: '799'
-      }],
       count: 0
     }
   },
@@ -93,13 +37,17 @@ export default {
       this.$refs.slide.style.transform = `translate3d(-${this.count * 271}px,0,0)`
     },
     next () {
-      if (this.count === this.goodsList.length - 4) {
+      if (this.count === this.goodsList.length - 4 || this.goodsList.length < 4) {
         return
       }
       this.count++
       this.$refs.slide.style.transform = `translate3d(-${this.count * 271}px,0,0)`
+    },
+    goDetail (tid, cid) {
+      this.$router.push(`/detail/${tid}/${cid}`)
     }
-  }
+  },
+  props: ['goodsList']
 }
 </script>
 

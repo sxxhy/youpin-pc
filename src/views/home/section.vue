@@ -3,7 +3,7 @@
     <div class="content clearfix">
       <div class="m-h-top clearfix">
         <h2 class="title">
-          小米众筹
+          {{title}}
           <slot name="subtitle"/>
         </h2>
         <span class="more">
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-
+  props: ['title']
 }
 </script>
 

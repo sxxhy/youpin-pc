@@ -6,99 +6,28 @@
           <a href="/">首页</a>
         </span>
         <span>
-          <a href="#">销量榜单</a>
+          <a href="javascript:;">{{goodsList.name}}</a>
         </span>
       </div>
-      <m-type-goods v-for="(item,index) of goodsList" :key="index" :pro-info="item"/>
+      <m-type-goods v-for="(item,index) of goodsList.subclass" :key="index" :pro-info="item"/>
     </div>
   </div>
 </template>
 
 <script>
 import MTypeGoods from './typeGoods'
+import { getGoodsList } from '../../service/index'
 export default {
   data () {
     return {
-      goodsList: [{
-        title: '销量榜单',
-        id: 1,
-        child: [{
-          img: 'http://img.youpin.mi-img.com/800_pic/100347_1hdjcs70ly5d3.png@base@tag=imgScale&h=350&w=350&et=1&eth=480&etw=480&etc=FFFFFF?t=webp',
-          name: '橡儿天然软木碳化鼠标垫',
-          title: '恒温舒适，碳化清香，耐污防水，耐弯折，大中小号尺寸可选',
-          money: '¥',
-          price: '9.9',
-          tag: '直降'
-        }, {
-          img: 'http://img.youpin.mi-img.com/800_pic/100347_1hdjcs70ly5d3.png@base@tag=imgScale&h=350&w=350&et=1&eth=480&etw=480&etc=FFFFFF?t=webp',
-          name: '橡儿天然软木碳化鼠标垫',
-          title: '恒温舒适，碳化清香，耐污防水，耐弯折，大中小号尺寸可选',
-          money: '¥',
-          price: '9.9',
-          tag: '直降'
-        }, {
-          img: 'http://img.youpin.mi-img.com/800_pic/100347_1hdjcs70ly5d3.png@base@tag=imgScale&h=350&w=350&et=1&eth=480&etw=480&etc=FFFFFF?t=webp',
-          name: '橡儿天然软木碳化鼠标垫',
-          title: '恒温舒适，碳化清香，耐污防水，耐弯折，大中小号尺寸可选',
-          money: '¥',
-          price: '9.9',
-          tag: '直降'
-        }]
-      }, {
-        title: '米粉热搜',
-        id: 1,
-        child: [{
-          img: 'http://img.youpin.mi-img.com/800_pic/100347_1hdjcs70ly5d3.png@base@tag=imgScale&h=350&w=350&et=1&eth=480&etw=480&etc=FFFFFF?t=webp',
-          name: '橡儿天然软木碳化鼠标垫',
-          title: '恒温舒适，碳化清香，耐污防水，耐弯折，大中小号尺寸可选',
-          money: '¥',
-          price: '9.9',
-          tag: '直降'
-        }, {
-          img: 'http://img.youpin.mi-img.com/800_pic/100347_1hdjcs70ly5d3.png@base@tag=imgScale&h=350&w=350&et=1&eth=480&etw=480&etc=FFFFFF?t=webp',
-          name: '橡儿天然软木碳化鼠标垫',
-          title: '恒温舒适，碳化清香，耐污防水，耐弯折，大中小号尺寸可选',
-          money: '¥',
-          price: '9.9',
-          tag: '直降'
-        }, {
-          img: 'http://img.youpin.mi-img.com/800_pic/100347_1hdjcs70ly5d3.png@base@tag=imgScale&h=350&w=350&et=1&eth=480&etw=480&etc=FFFFFF?t=webp',
-          name: '橡儿天然软木碳化鼠标垫',
-          title: '恒温舒适，碳化清香，耐污防水，耐弯折，大中小号尺寸可选',
-          money: '¥',
-          price: '9.9',
-          tag: '直降'
-        }, {
-          img: 'http://img.youpin.mi-img.com/800_pic/100347_1hdjcs70ly5d3.png@base@tag=imgScale&h=350&w=350&et=1&eth=480&etw=480&etc=FFFFFF?t=webp',
-          name: '橡儿天然软木碳化鼠标垫',
-          title: '恒温舒适，碳化清香，耐污防水，耐弯折，大中小号尺寸可选',
-          money: '¥',
-          price: '9.9',
-          tag: '直降'
-        }, {
-          img: 'http://img.youpin.mi-img.com/800_pic/100347_1hdjcs70ly5d3.png@base@tag=imgScale&h=350&w=350&et=1&eth=480&etw=480&etc=FFFFFF?t=webp',
-          name: '橡儿天然软木碳化鼠标垫',
-          title: '恒温舒适，碳化清香，耐污防水，耐弯折，大中小号尺寸可选',
-          money: '¥',
-          price: '9.9',
-          tag: '直降'
-        }]
-      }, {
-        title: '品质生活',
-        id: 1,
-        child: [{
-          img: 'http://img.youpin.mi-img.com/800_pic/100347_1hdjcs70ly5d3.png@base@tag=imgScale&h=350&w=350&et=1&eth=480&etw=480&etc=FFFFFF?t=webp',
-          name: '橡儿天然软木碳化鼠标垫',
-          title: '恒温舒适，碳化清香，耐污防水，耐弯折，大中小号尺寸可选',
-          money: '¥',
-          price: '9.9',
-          tag: '直降'
-        }]
-      }]
+      goodsList: []
     }
   },
   components: {
     MTypeGoods
+  },
+  async created () {
+    this.goodsList = await getGoodsList(this.$route.params.id)
   }
 }
 </script>

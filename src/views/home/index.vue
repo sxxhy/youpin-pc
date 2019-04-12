@@ -2,22 +2,18 @@
   <div class="m-home">
     <div class="banner-menu">
       <m-menu/>
-      <m-banner/>
+      <m-banner :banner-list="homeInfo.banner"/>
     </div>
     <m-hero/>
-    <m-section class="m-h-crowdfounding" v-for="(item,index) of 4" :key="index">
+    <m-section>
+      <div slot="mHContainer">
+        <m-crowdfounding/>
+      </div>
+    </m-section>
+    <m-section class="m-h-crowdfounding" v-for="(item,index) of homeInfo.goods" :key="index" :title="item[0].title">
       <span slot="subtitle" class="subtitle">永远好奇 永远年轻</span>
-      <div slot="mHContainer" v-if="index===0">
-        <m-crowdfounding :index="index"/>
-      </div>
-      <div slot="mHContainer" v-if="index===1">
-        <m-new-goods/>
-      </div>
-      <div slot="mHContainer" v-if="index===2">
-        <m-new-goods/>
-      </div>
-      <div slot="mHContainer" v-if="index===3">
-        <m-new-goods/>
+      <div slot="mHContainer">
+        <m-new-goods :goods-list="item"/>
       </div>
     </m-section>
     <m-recommend/>
@@ -33,6 +29,11 @@ import MNewGoods from './newGoods'
 import MRecommend from './recommend'
 import { getHomeInfo } from '../../service/index'
 export default {
+  data () {
+    return {
+      homeInfo: {}
+    }
+  },
   components: {
     MMenu,
     MBanner,
@@ -43,7 +44,7 @@ export default {
     MRecommend
   },
   async created () {
-    console.log(await getHomeInfo())
+    this.homeInfo = await getHomeInfo()
   }
 }
 </script>
