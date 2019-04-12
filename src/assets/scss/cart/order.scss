@@ -1,0 +1,386 @@
+.m-order {
+  border-top: 1px solid #e7e7e7;
+  position: relative;
+  .wrapper {
+    margin: 0 auto 100px;
+    width: 1073px;
+    min-height: 400px;
+    .secondary {
+      padding: 30px 0;
+      width: 100%;
+      display: block;
+      float: none;
+      background: transparent repeat 0 0 none;
+      font-size: 13px;
+      span {
+        &::after {
+          content: ">";
+        }
+        &:last-child::after {
+          content: '';
+        }
+        &:first-child a {
+          margin-left: 0;
+        }
+        a {
+          margin: 0 6px;
+          cursor: pointer;
+          color: #000;
+          &:hover {
+            color: #845f3f;
+          }
+        }
+        &:last-child a {
+          color: #999;
+          cursor: default;
+        }
+      }
+    }
+  }
+  .address {
+    .title {
+      margin-bottom: 15px;
+      font-size: 19px;
+      color: #333;
+    }
+    .list {
+      .address-list {
+        .unselect {
+          border: 1px solid #e7e7e7;
+        }
+        .address-item {
+          width: 250px;
+          background: #fff;
+          float: left;
+          margin-bottom: 10px;
+          height: 200px;
+          position: relative;
+          margin-left: 10px;
+          transition: all .5s ease;
+          &.selected {
+            border: 1px solid #845f3f;
+          }
+          &:hover {
+            border: 1px solid #845f3f;
+            animation: lineact 1s;
+            .icon {
+              background-position: 0 -679px !important;
+            }
+            .add-ads {
+              color: #7f6044 !important;
+            }
+          }
+          .mark {
+            background: #7f6044;
+            margin: 3px;
+            padding: 0;
+            width: 40px;
+            font-size: 9px;
+            color: #fff;
+            text-align: center;
+            &.addr-hidden {
+              visibility: hidden;
+            }
+          }
+          .container {
+            margin-left: 30px;
+            .name {
+              color: #333;
+              font-size: 16px;
+            }
+            .tel {
+              color: #333;
+              margin-top: 15px;
+              font-size: 13px;
+            }
+            .city,.address {
+              color: #999;
+              margin-top: 0;
+              font-size: 13px;
+            }
+          }
+          .update {
+            right: 5px;
+            bottom: 5px;
+            font-size: 14px;
+            position: absolute;
+            color: #845f3f;
+            span {
+              padding: 5px;
+              cursor: pointer;
+            }
+          }
+        }
+        &>div:nth-child(4n+1) {
+          margin-left: 0 !important;
+        }
+        .address-item-add {
+          .add-icon {
+            margin-top: 68px;
+            text-align: center;
+            .icon {
+              width: 27px;
+              height: 27px;
+              background-position: 0 -648px;
+            }
+          }
+          .add-ads {
+            margin: 0 auto;
+            margin-top: 10px;
+            text-align: center;
+            color: #ccc;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+    .more-ads {
+      margin-top: 15px;
+      margin-bottom: 8px;
+      box-sizing: border-box;
+      height: 42px;
+      line-height: 42px;
+      background-color: #fafafa;
+      width: 100%;
+      text-align: center;
+      color: #999;
+      font-size: 14px;
+      transition: all .5s cubic-bezier(0,1,.5,1);
+      cursor: pointer;
+      &:hover {
+        color: #845f3f;
+        .icon-more-down {
+          background-position: 0 -54px;
+        }
+        .icon-more-up {
+          background-position: 0 -22px;
+        }
+      }
+      .text {
+        margin-right: 8px;
+      }
+      .icon-more-down {
+        width: 12px;
+        height: 12px;
+        background-position: 0 -86px;
+      }
+      .icon-more-up {
+        width: 12px;
+        height: 12px;
+        background-position: 0 -70px;
+      }
+    }
+  }
+  .form-item {
+    border-bottom: 1px solid #e7e7e7;
+    overflow: hidden;
+    margin: 36px 20px 0;
+    .left-label {
+      float: left;
+      height: 50px;
+      line-height: 50px;
+      font-size: 19px;
+      color: #333;
+    }
+    .desc {
+      margin-left: 50px;
+      display: inline-block;
+      height: 50px;
+      line-height: 50px;
+      font-size: 14px;
+      color: #845f3f;
+    }
+  }
+  .merchant {
+    .merchant-info {
+      margin-top: 55px;
+      margin-bottom: 17px;
+      height: 30px;
+      .name {
+        margin-left: 10px;
+        font-size: 14px;
+        color: #333;
+        display: inline-block;
+        height: 30px;
+        line-height: 30px;
+      }
+      .threshold {
+        font-size: 12px;
+        color: #999;
+      }
+    }
+    .merchant-spread {
+      border: 1px solid #e7e7e7;
+      padding-left: 20px;
+      padding-right: 20px;
+      .good-container {
+        position: relative;
+        height: 90px;
+        line-height: 90px;
+        box-sizing: border-box;
+        overflow: hidden;
+        border-bottom: 1px solid #e7e7e7;
+        .pro-support {
+          position: absolute;
+          left: 65px;
+          bottom: 3px;
+          height: 25px;
+          line-height: 25px;
+          font-size: 12px;
+          color: #999;
+          .icon {
+            margin-right: 5px;
+            vertical-align: -2px;
+            width: 16px;
+            height: 16px;
+            background-position: 0 -215px;
+          }
+        }
+        .img {
+          width: 50px;
+          float: left;
+          height: 90px;
+          line-height: 90px;
+          img {
+            width: 50px;
+            height: 50px;
+          }
+        }
+        .name {
+          margin-left: 20px;
+          width: 350px;
+          color: #333;
+          overflow: hidden;
+          -o-text-overflow: ellipsis;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          position: relative;
+          float: left;
+          height: 90px;
+          line-height: 90px;
+          .product-name {
+            display: inline-block;
+            vertical-align: middle;
+          }
+        }
+        .total {
+          text-align: right;
+          width: 180px;
+          color: #c00000;
+          float: right;
+          height: 90px;
+          line-height: 90px;
+          .text {
+            margin-right: 3px;
+          }
+        }
+        .price {
+          float: right;
+          height: 90px;
+          line-height: 90px;
+        }
+      }
+      .form-item {
+        border-bottom: 1px solid #e7e7e7;
+        overflow: hidden;
+        margin: 36px 20px 0;
+        .left-label {
+          float: left;
+          height: 50px;
+          line-height: 50px;
+          font-size: 19px;
+          color: #333;
+        }
+        .msg-container {
+          margin-left: 51px;
+          float: left;
+          .user-msg {
+            margin-top: 23px;
+            resize: none;
+            width: 762.5px;
+            height: 100px;
+            border: 1px solid #e7e7e7;
+            outline: none;
+            padding-left: 15px;
+            box-sizing: border-box;
+            font-size: 14px;
+            padding-top: 12px;
+            margin-bottom: 23px;
+            transition: border .6s ease;
+            &:focus {
+              border: 1px solid #845f3f;
+              animation: changeBorder 1s;
+            }
+          }
+        }
+      }
+      .merchant-total {
+        width: 100%;
+        overflow: hidden;
+        .total {
+          float: right;
+          height: 90px;
+          line-height: 90px;
+          .red {
+            color: #c00000;
+          }
+        }
+      }
+    }
+  }
+  .checkout-summary {
+    margin-top: 37px;
+    text-align: right;
+    border-bottom: 1px solid #e7e7e7;
+    .check-freeInfo {
+      text-align: right;
+      .freeInfo-item {
+        height: 25px;
+        font-size: 14px;
+        display: block;
+        .freeInfo-key {
+          display: inline-block;
+        }
+        .freeInfo-value {
+          margin-left: 25px;
+          margin-right: 20px;
+          display: inline-block;
+          width: 80px;
+          color: #c00000;
+        }
+      }
+      .fee-map-item {
+        position: relative;
+        z-index: 999;
+      }
+      .total {
+        font-size: 18px;
+        margin-top: 37px;
+        margin-bottom: 20px;
+        .freeInfo-value {
+          margin-right: 20px;
+          color: #c00000;
+        }
+      }
+    }
+  }
+  .bottom-pay {
+    margin-top: 45px;
+    text-align: right;
+    .btn {
+      color: #fff;
+      background-color: #845f3f;
+      min-width: 167px;
+      height: 52px;
+      line-height: 50px;
+      font-size: 20px;
+      display: inline-block;
+      border-radius: 2px;
+      text-align: center;
+      border: 1px solid #845f3f;
+      box-sizing: border-box;
+      padding: 0 6px;
+      transition: all .5s cubic-bezier(0,1,.5,1);
+    }
+  }
+}

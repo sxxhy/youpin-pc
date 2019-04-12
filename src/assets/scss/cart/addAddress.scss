@@ -1,0 +1,171 @@
+.m-add-address {
+  .add-container {
+    -webkit-perspective: 600;
+    perspective: 600;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,.5);
+    z-index: 999;
+    .modal {
+      width: 660px;
+      height: 565px;
+      margin-left: 330px;
+      margin-top: 282.5px;
+      overflow: hidden;
+      background: #fff;
+      .modal-data {
+        background-color: #fff;
+        z-index: 1000;
+        opacity: 1;
+        .title {
+          background: #fff;
+          margin-top: 20px;
+          height: 60px;
+          .mark {
+            margin-left: 25px;
+            line-height: 60px;
+            font-size: 19px;
+            float: left;
+          }
+          .close {
+            margin-right: 30px;
+            margin-top: 20px;
+            float: right;
+            .icon {
+              width: 13px;
+              height: 13px;
+              background-position: 0 -119px;
+              &:hover {
+                background-position: 0 -102px;
+              }
+            }
+          }
+        }
+        .line {
+          margin-left: 25px;
+          background: #eee;
+          height: 1px;
+          width: 603px;
+          margin-bottom: 10px;
+        }
+        .input-u {
+          float: left;
+          a {
+            position: absolute;
+            margin-left: -30px;
+            margin-top: 15px;
+            &.icon-error {
+              width: 18px;
+              height: 18px;
+              background-position: 0 -358px;
+            }
+          }
+          .input {
+            padding-right: 30px;
+            transition: border .5s;
+            &.error {
+              border-color: #d54843 !important;
+            }
+          }
+          textarea.error {
+            border-color: #d54843 !important;
+          }
+          .hint {
+            height: 16px;
+            overflow: hidden;
+            font-size: 12px;
+            padding: 0 10px;
+            opacity: 0;
+            display: block;
+            &.default {
+              opacity: 0;
+            }
+            &.error {
+              opacity: 1;
+              color: #d54843;
+            }
+          }
+        }
+        .input-box {
+          margin-top: 30px;
+          margin-left: 20px;
+          margin-right: 20px;
+          overflow: hidden;
+          .input {
+            padding: 10px;
+            margin: 5px;
+            font-size: 14px;
+            width: 297px;
+            box-sizing: border-box;
+            border: 1px solid #eee;
+            outline: none;
+          }
+        }
+        .input-box2 {
+          margin-top: 10px;
+          margin-left: 20px;
+          margin-right: 20px;
+          overflow: hidden;
+          .input, textarea {
+            padding: 10px;
+            margin: 5px;
+            font-size: 14px;
+            width: 605px;
+            box-sizing: border-box;
+            border: 1px solid #eee;
+          }
+        }
+        .input-box3 {
+          margin-top: 10px;
+          margin-left: 20px;
+          margin-right: 20px;
+          overflow: hidden;
+          .input {
+            padding: 10px;
+            margin: 5px;
+            font-size: 14px;
+            width: 297px;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            border: 1px solid #eee;
+          }
+        }
+        .submit-box {
+          margin-top: 50px;
+          background: #f2f2f2;
+          height: 90px;
+          margin-left: 0;
+          margin-right: 0;
+          text-align: center;
+          .btn {
+            display: inline-block;
+            border-radius: 2px;
+            text-align: center;
+            margin-top: 25px;
+            box-sizing: border-box;
+            padding: 0 6px;
+            transition: all .5s cubic-bezier(0,1,.5,1);
+            min-width: 188px;
+            height: 40px;
+            line-height: 38px;
+            font-size: 20px;
+            color: #fff;
+            background-color: #845f3f;
+            border-color: #845f3f;
+            &.btn-cancel {
+              margin-left: 20px;
+            }
+            &:hover {
+              color: #fff;
+              background-color: #d1bfa6;
+              border-color: #d1bfa6;
+            }
+          }
+        }
+      }
+    }
+  }
+}

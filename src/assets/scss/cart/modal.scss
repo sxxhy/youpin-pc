@@ -1,0 +1,79 @@
+.m-modal {
+  -webkit-perspective: 600;
+  perspective: 600;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,.5);
+  z-index: 999;
+  .modal-confirm {
+    width: 430px;
+    height: 250px;
+    margin-top: -125px;
+    margin-left: -215px;
+    background: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border: none;
+    overflow: hidden;
+    outline: none;
+    .modal-inner {
+      padding: 70px 0 20px;
+      text-align: center;
+      .icon {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 13px;
+        height: 13px;
+        background-position: 0 -119px;
+      }
+      .modal-info {
+        height: 72px;
+        margin: 0 20px 20px;
+        font-size: 20px;
+        overflow: hidden;
+        .info-tit {
+          line-height: 26px;
+        }
+      }
+      .modal-control {
+        .btn {
+          margin: 0 10px;
+          min-width: 97px;
+          height: 43px;
+          line-height: 41px;
+          font-size: 18px;
+          display: inline-block;
+          border-radius: 2px;
+          text-align: center;
+          box-sizing: border-box;
+          padding: 0 6px;
+          transition: all .5s cubic-bezier(0,1,.5,1);
+          &:first-child {
+            color: #fff;
+            background-color: #845f3f;
+            border-color: #845f3f;
+            &:hover {
+              color: #fff;
+              background-color: #d1bfa6;
+              border-color: #d1bfa6;
+            }
+          }
+          &:last-child {
+            color: #666;
+            border: 1px solid #666;
+            &:hover {
+              color: #fff;
+              background-color: #845f3f;
+              border-color: #845f3f;
+            }
+          }
+        }
+      }
+    }
+  }
+}

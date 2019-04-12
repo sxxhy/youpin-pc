@@ -1,17 +1,17 @@
 <template>
   <div class="m-sku">
     <div class="name clearfix">
-      <div class="good-name fl">每晚长绒棉贡缎套件</div>
+      <div class="good-name fl">{{proInfo.name}} {{specInfo.name}} {{specInfo.option1}} {{specInfo.option2}}</div>
     </div>
-    <div class="summary">丝般睡感，纹理细腻，柔润升级，放心安睡</div>
+    <div class="summary">{{proInfo.title}}</div>
     <div class="card">
       <div class="price-line">
         <h5 class="sku-title">售价</h5>
         <div class="price">
-          <span class="money">¥</span>
-          <span class="value">429</span>
-          <span class="original">¥499</span>
-          <span class="tag">直降20元</span>
+          <span class="money">{{proInfo.money}}</span>
+          <span class="value">{{hasGoods && !isFirstSelect ? specInfo.price : proInfo.price}}</span>
+          <span class="original">{{proInfo.money}}{{proInfo.oldprice}}</span>
+          <span class="tag">{{proInfo.tag}}</span>
         </div>
       </div>
       <div class="service-line">
@@ -42,22 +42,22 @@
     </div>
     <div class="type-line">
       <div class="info">
-        <div class="size clearfix">
+        <div class="size clearfix" v-if="colorList!==0">
           <h5 class="sku-title">{{proInfo.option1_name}}</h5>
           <div class="size-container">
-            <div class="tag-item-onSaled" v-for="(item,index) of colorList" :key="index">{{item}}</div>
+            <div :class="colorSelect === item ? 'tag-item-onSelected' : 'tag-item-onSaled'" v-for="(item,index) of colorList" :key="index" @click="sureColor(item)">{{item}}</div>
           </div>
         </div>
-        <div class="size clearfix">
+        <div class="size clearfix" v-if="sizeList!==0">
           <h5 class="sku-title">{{proInfo.option2_name}}</h5>
           <div class="size-container">
-            <div class="tag-item-onSaled" v-for="(item,index) of sizeList" :key="index">{{item}}</div>
+            <div :class="sizeSelect === item ? 'tag-item-onSelected' : 'tag-item-onSaled'" v-for="(item,index) of sizeList" :key="index" @click="sureSize(item)">{{item}}</div>
           </div>
         </div>
-        <div class="size clearfix">
+        <div class="size clearfix" v-if="setMealList.length!==0">
           <h5 class="sku-title">{{proInfo.option3_name}}</h5>
           <div class="size-container">
-            <div class="tag-item-onSaled" v-for="(item,index) of setMealList" :key="index">{{item}}</div>
+            <div :class="mealSelect === item ? 'tag-item-onSelected' : 'tag-item-onSaled'" v-for="(item,index) of setMealList" :key="index" @click="sureMeal(item)">{{item}}</div>
           </div>
         </div>
       </div>
@@ -76,8 +76,9 @@
     </div>
     <div class="btn-line">
       <div class="buy-btn">
-        <a href="javascript:;" class="btn-cart">加入购物车</a>
-        <a href="javascript:;" class="btn-buy">立即购买</a>
+        <a href="javascript:;" class="btn-cart" v-if="hasGoods">加入购物车</a>
+        <a href="javascript:;" class="btn-buy" v-if="hasGoods">立即购买</a>
+        <a href="javascript:;" class="btn-stop" v-if="!hasGoods">已售停</a>
       </div>
       <div class="favor-btn">
         <a href="javascript:;" class="icon icon-collection"></a>
@@ -92,7 +93,7 @@
 </template>
 
 <script>
-import { resetArr } from '../../lib/util.js'
+import { resetArr, sureSelect } from '../../lib/util.js'
 export default {
   data () {
     return {
@@ -104,84 +105,85 @@ export default {
         price: '279',
         oldprice: '299',
         money: '￥',
+        tag: '直降20元',
         GoodsSpecs: [{
           img: '',
           name: '芥末绿',
           option1: '适用于1.2m床',
           option2: '低贱',
-          price: ''
+          price: '279'
         }, {
           img: '',
           name: '芥末绿',
           option1: '适用于1.5m床',
           option2: '平庸',
-          price: ''
+          price: '399'
         }, {
           img: '',
           name: '雅灰蓝',
           option1: '适用于1.2m床',
           option2: '尊贵',
-          price: ''
+          price: '499'
         }, {
           img: '',
           name: '雅灰蓝',
           option1: '适用于1.5m床',
           option2: '平庸',
-          price: ''
+          price: '399'
         }, {
           img: '',
           name: '雅灰蓝',
           option1: '适用于1.8m床',
           option2: '尊贵',
-          price: ''
+          price: '499'
         }, {
           img: '',
           name: '杏仁色',
           option1: '适用于1.2m床',
           option2: '低贱',
-          price: ''
+          price: '299'
         }, {
           img: '',
           name: '杏仁色',
           option1: '适用于1.5m床',
           option2: '平庸',
-          price: ''
+          price: '399'
         }, {
           img: '',
           name: '卡蜜拉',
           option1: '适用于1.2m床',
           option2: '低贱',
-          price: ''
+          price: '299'
         }, {
           img: '',
           name: '卡蜜拉',
           option1: '适用于1.5m床',
           option2: '平庸',
-          price: ''
+          price: '299'
         }, {
           img: '',
           name: '卡蜜拉',
           option1: '适用于1.8m床',
           option2: '尊贵',
-          price: ''
+          price: '499'
         }, {
           img: '',
           name: '蓝调',
           option1: '适用于1.2m床',
           option2: '低贱',
-          price: ''
+          price: '299'
         }, {
           img: '',
           name: '蓝调',
           option1: '适用于1.5m床',
           option2: '平庸',
-          price: ''
+          price: '399'
         }, {
           img: '',
           name: '蓝调',
           option1: '适用于1.8m床',
           option2: '尊贵',
-          price: ''
+          price: '499'
         }],
         option1_name: '颜色',
         option2_name: '尺寸',
@@ -189,22 +191,73 @@ export default {
       },
       colorList: [], // 颜色
       sizeList: [], // 尺寸
-      setMealList: [] // 套餐
+      setMealList: [], // 套餐,
+      colorSelect: '', // 颜色选择
+      sizeSelect: '', // 尺寸选择
+      mealSelect: '', // 套餐选择
+      isFirstSelect: true, // 是否是第一次选择
+      specInfo: {}, // 规格数据
+      hasGoods: true // 是否有货
     }
   },
   methods: {
-    reduce () {
+    reduce () { // 减
       if (this.countValue === 1) return
       this.countValue--
     },
-    add () {
+    add () { // 加
       this.countValue++
     },
-    setValue () {
+    setValue () { // 值判断
       if (!parseInt(this.countValue)) {
         this.countValue = 1
       }
       this.countValue = parseInt(this.countValue)
+    },
+    select (arr, value, name1, name2, name3, num) { // 规格联动
+      if (this.isFirstSelect) {
+        this.isFirstSelect = false
+        let obj = sureSelect({ arr: arr, value, name1: name1, name2: name2, name3: name3 })
+        if (num === 1) {
+          this.sizeSelect = obj.val1
+          this.mealSelect = obj.val2
+        }
+        if (num === 2) {
+          this.colorSelect = obj.val1
+          this.mealSelect = obj.val2
+        }
+        if (num === 3) {
+          this.colorSelect = obj.val1
+          this.sizeSelect = obj.val2
+        }
+      }
+    },
+    getSpecDetail () {
+      let arr = this.proInfo.GoodsSpecs.filter((item) => {
+        return item.name === this.colorSelect && item.option1 === this.sizeSelect && item.option2 === this.mealSelect
+      })
+      if (arr.length > 0) {
+        this.specInfo = arr[0]
+        this.hasGoods = true
+      } else {
+        this.specInfo = { name: '', option1: '', option2: '', price: '' }
+        this.hasGoods = false
+      }
+    },
+    sureColor (value) { // 颜色
+      this.colorSelect = value
+      this.select(this.proInfo.GoodsSpecs, value, 'name', 'option1', 'option2', 1)
+      this.getSpecDetail()
+    },
+    sureSize (value) { // 尺寸
+      this.sizeSelect = value
+      this.select(this.proInfo.GoodsSpecs, value, 'option1', 'name', 'option2', 2)
+      this.getSpecDetail()
+    },
+    sureMeal (value) { // 套餐
+      this.mealSelect = value
+      this.select(this.proInfo.GoodsSpecs, value, 'option2', 'name', 'option1', 3)
+      this.getSpecDetail()
     }
   },
   created () {
@@ -425,7 +478,6 @@ export default {
         border-radius: 2px;
         text-align: center;
         border: 1px solid #666;
-        display: inline-block;
         padding: 0 6px;
         transition: all .5s cubic-bezier(0,1,.5,1);
       .btn-cart
@@ -443,6 +495,11 @@ export default {
           color: #fff;
           background-color: #845f3f;
           border-color: #845f3f;
+      .btn-stop
+        opacity: .8!important;
+        cursor: not-allowed!important;
+        color: #845f3f;
+        border-color: #845f3f;
     .favor-btn
       float: left;
       width: 50px;
