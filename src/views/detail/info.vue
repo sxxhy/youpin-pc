@@ -8,12 +8,7 @@
         <div class="line" ref="line"></div>
       </div>
     </div>
-    <div class="main-body">
-      <div>
-        <img src="https://img.youpin.mi-img.com/editor1/8c55ed1a3139685145b3bd782ab681ef.jpg?w=1080&h=797">
-        <img src="https://img.youpin.mi-img.com/editor1/8c55ed1a3139685145b3bd782ab681ef.jpg?w=1080&h=797">
-      </div>
-    </div>
+    <div class="main-body" v-html="contentInfo"></div>
   </div>
 </template>
 
@@ -28,7 +23,8 @@ export default {
     foucs (i) {
       this.$refs.line.style.left = `${i * 128}px`
     }
-  }
+  },
+  props: ['contentInfo']
 }
 </script>
 
@@ -40,7 +36,7 @@ export default {
     background-color: #e7e7e7;
     z-index: 5;
     .info-nav
-      height: 42px;
+      height: 10px;
       overflow: hidden;
       padding: 16px 0 13px;
       .info-nav-item
@@ -69,7 +65,7 @@ export default {
   .main-body
     min-height: 900px;
     font-size: 0;
-    img
-      width: 100%;
+    &/deep/ img
+      width: 100% !important;
       height: auto;
 </style>

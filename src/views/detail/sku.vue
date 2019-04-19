@@ -1,7 +1,7 @@
 <template>
   <div class="m-sku">
     <div class="name clearfix">
-      <div class="good-name fl">{{proInfo.name}} {{specInfo.name}} {{specInfo.option1}} {{specInfo.option2}}</div>
+      <div class="good-name fl">{{proInfo.sitename}} {{specInfo.name}} {{specInfo.option1}} {{specInfo.option2}}</div>
     </div>
     <div class="summary">{{proInfo.title}}</div>
     <div class="card">
@@ -11,7 +11,7 @@
           <span class="money">{{proInfo.money}}</span>
           <span class="value">{{hasGoods && !isFirstSelect ? specInfo.price : proInfo.price}}</span>
           <span class="original">{{proInfo.money}}{{proInfo.oldprice}}</span>
-          <span class="tag">{{proInfo.tag}}</span>
+          <span class="tag" v-if="proInfo.promotion_name2">{{proInfo.promotion_name2}}</span>
         </div>
       </div>
       <div class="service-line">
@@ -36,25 +36,25 @@
         </div>
       </div>
     </div>
-    <div class="address-line">
+    <!--<div class="address-line">
       <h5 class="sku-title">配送区域</h5>
       <div class="address"></div>
-    </div>
+    </div>-->
     <div class="type-line">
       <div class="info">
-        <div class="size clearfix" v-if="colorList!==0">
+        <div class="size clearfix" v-if="colorList[0]">
           <h5 class="sku-title">{{proInfo.option1_name}}</h5>
           <div class="size-container">
             <div :class="colorSelect === item ? 'tag-item-onSelected' : 'tag-item-onSaled'" v-for="(item,index) of colorList" :key="index" @click="sureColor(item)">{{item}}</div>
           </div>
         </div>
-        <div class="size clearfix" v-if="sizeList!==0">
+        <div class="size clearfix" v-if="sizeList[0]">
           <h5 class="sku-title">{{proInfo.option2_name}}</h5>
           <div class="size-container">
             <div :class="sizeSelect === item ? 'tag-item-onSelected' : 'tag-item-onSaled'" v-for="(item,index) of sizeList" :key="index" @click="sureSize(item)">{{item}}</div>
           </div>
         </div>
-        <div class="size clearfix" v-if="setMealList.length!==0">
+        <div class="size clearfix" v-if="setMealList[0]">
           <h5 class="sku-title">{{proInfo.option3_name}}</h5>
           <div class="size-container">
             <div :class="mealSelect === item ? 'tag-item-onSelected' : 'tag-item-onSaled'" v-for="(item,index) of setMealList" :key="index" @click="sureMeal(item)">{{item}}</div>
@@ -76,8 +76,8 @@
     </div>
     <div class="btn-line">
       <div class="buy-btn">
-        <a href="javascript:;" class="btn-cart" v-if="hasGoods">加入购物车</a>
-        <a href="javascript:;" class="btn-buy" v-if="hasGoods">立即购买</a>
+        <a href="javascript:;" class="btn-cart" v-if="hasGoods" @click="addCart">加入购物车</a>
+        <a href="javascript:;" class="btn-buy" v-if="hasGoods" @click="goCartBuy">立即购买</a>
         <a href="javascript:;" class="btn-stop" v-if="!hasGoods">已售停</a>
       </div>
       <div class="favor-btn">
@@ -94,101 +94,11 @@
 
 <script>
 import { resetArr, sureSelect } from '../../lib/util.js'
+import { mapMutations, mapState } from 'vuex'
 export default {
   data () {
     return {
       countValue: 1,
-      proInfo: {
-        id: 1,
-        name: '每晚长绒棉贡缎套件',
-        title: '丝般睡感，纹理细腻，柔润升级，放心安睡',
-        price: '279',
-        oldprice: '299',
-        money: '￥',
-        tag: '直降20元',
-        GoodsSpecs: [{
-          img: '',
-          name: '芥末绿',
-          option1: '适用于1.2m床',
-          option2: '低贱',
-          price: '279'
-        }, {
-          img: '',
-          name: '芥末绿',
-          option1: '适用于1.5m床',
-          option2: '平庸',
-          price: '399'
-        }, {
-          img: '',
-          name: '雅灰蓝',
-          option1: '适用于1.2m床',
-          option2: '尊贵',
-          price: '499'
-        }, {
-          img: '',
-          name: '雅灰蓝',
-          option1: '适用于1.5m床',
-          option2: '平庸',
-          price: '399'
-        }, {
-          img: '',
-          name: '雅灰蓝',
-          option1: '适用于1.8m床',
-          option2: '尊贵',
-          price: '499'
-        }, {
-          img: '',
-          name: '杏仁色',
-          option1: '适用于1.2m床',
-          option2: '低贱',
-          price: '299'
-        }, {
-          img: '',
-          name: '杏仁色',
-          option1: '适用于1.5m床',
-          option2: '平庸',
-          price: '399'
-        }, {
-          img: '',
-          name: '卡蜜拉',
-          option1: '适用于1.2m床',
-          option2: '低贱',
-          price: '299'
-        }, {
-          img: '',
-          name: '卡蜜拉',
-          option1: '适用于1.5m床',
-          option2: '平庸',
-          price: '299'
-        }, {
-          img: '',
-          name: '卡蜜拉',
-          option1: '适用于1.8m床',
-          option2: '尊贵',
-          price: '499'
-        }, {
-          img: '',
-          name: '蓝调',
-          option1: '适用于1.2m床',
-          option2: '低贱',
-          price: '299'
-        }, {
-          img: '',
-          name: '蓝调',
-          option1: '适用于1.5m床',
-          option2: '平庸',
-          price: '399'
-        }, {
-          img: '',
-          name: '蓝调',
-          option1: '适用于1.8m床',
-          option2: '尊贵',
-          price: '499'
-        }],
-        option1_name: '颜色',
-        option2_name: '尺寸',
-        option3_name: '套餐'
-      },
       colorList: [], // 颜色
       sizeList: [], // 尺寸
       setMealList: [], // 套餐,
@@ -196,11 +106,12 @@ export default {
       sizeSelect: '', // 尺寸选择
       mealSelect: '', // 套餐选择
       isFirstSelect: true, // 是否是第一次选择
-      specInfo: {}, // 规格数据
+      specInfo: '', // 规格数据
       hasGoods: true // 是否有货
     }
   },
   methods: {
+    ...mapMutations(['setCartCount', 'setCart', 'setCartSave']),
     reduce () { // 减
       if (this.countValue === 1) return
       this.countValue--
@@ -258,12 +169,58 @@ export default {
       this.mealSelect = value
       this.select(this.proInfo.GoodsSpecs, value, 'option2', 'name', 'option1', 3)
       this.getSpecDetail()
+    },
+    addCart () { // 加入购物车
+      if (this.specInfo === '') { // 如果未选择规格 提示
+        return this.$toast.top('请选择规格')
+      } else { // 判断是否已有该商品
+        for (let i in this.cart) {
+          if (this.cart[i].id === this.specInfo.id) { // 存在叠加数量
+            this.cart[i].count += parseInt(this.countValue)
+            this.setCartSave(this.cart) // 修改后进行保存
+            this.setCartCount(this.cart)
+            this.$toast.top('加入成功')
+            return
+          }
+        }
+      }
+      this.setCart({ // 不存在添加信息
+        name: this.proInfo.sitename,
+        id: this.specInfo.id,
+        color: this.specInfo.name,
+        size: this.specInfo.option1,
+        meal: this.specInfo.option2,
+        img: this.specInfo.img,
+        price: this.specInfo.price,
+        count: this.countValue,
+        money: this.proInfo.money,
+        tid: this.proInfo.type[0].fatherid,
+        cid: this.proInfo.id,
+        parentName: this.proInfo.type[0].fathername,
+        isSelect: true
+      })
+      this.setCartCount(this.cart)
+      this.$toast.top('加入成功')
+    },
+    goCartBuy () {
+      this.addCart()
+      if (!this.specInfo) return
+      this.$router.push('/cart')
     }
   },
   created () {
-    this.colorList = resetArr(this.proInfo.GoodsSpecs, 'name')
-    this.sizeList = resetArr(this.proInfo.GoodsSpecs, 'option1')
-    this.setMealList = resetArr(this.proInfo.GoodsSpecs, 'option2')
+    //
+  },
+  props: ['proInfo'],
+  watch: {
+    'proInfo' () {
+      this.colorList = resetArr(this.proInfo.GoodsSpecs, 'name')
+      this.sizeList = resetArr(this.proInfo.GoodsSpecs, 'option1')
+      this.setMealList = resetArr(this.proInfo.GoodsSpecs, 'option2')
+    }
+  },
+  computed: {
+    ...mapState(['cart', 'cartCount'])
   }
 }
 </script>

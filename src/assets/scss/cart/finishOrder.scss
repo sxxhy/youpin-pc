@@ -1,0 +1,58 @@
+.m-finish-order {
+  min-height: 440px;
+  background-color: #f2f2f2;
+  .m-secondary {
+    padding: 30px 0;
+    width: 100%;
+    display: block;
+    float: none;
+    background: transparent repeat 0 0 none;
+    font-size: 13px;
+    span {
+      a {
+        margin: 0 6px;
+        cursor: pointer;
+        color: #000;
+      }
+      &:after {
+        content: '>';
+      }
+    }
+    span:first-child a {
+      margin-left: 0;
+    }
+    span:last-child {
+      a {
+        color: #999;
+        cursor: default;
+      }
+      &:after {
+        content: '';
+      }
+    }
+  }
+  .order-info {
+    color: #666;
+    padding: 30px 0;
+    .tit {
+      margin-bottom: 26px;
+      color: #333;
+      font-size: 28px;
+      font-weight: 400;
+    }
+    .order-detail {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #333;
+      li {
+        line-height: 25px;
+      }
+      .price {
+        color: #c00000;
+        span {
+          color: #333;
+        }
+      }
+    }
+  }
+}

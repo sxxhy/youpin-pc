@@ -46,3 +46,12 @@ export const menuReset = function (arr) { // 获取的菜单数据重组
   }
   return setArr
 }
+
+export const creditPlgin = function ({ id, ele, src }) { // 动态加载js
+  document.getElementById(id) && document.getElementById(id).remove()
+  var element = document.createElement(ele)
+  var app = document.getElementById('app')
+  element.id = id
+  element.src = src
+  app.parentElement.insertBefore(element,app)
+}

@@ -1,6 +1,6 @@
 <template>
   <div class="m-typegoods">
-    <h2 :id="`secondId${proInfo.id}`">{{proInfo.name}}</h2>
+    <h2>{{proInfo.name}}</h2>
     <div class="product-list clearfix">
       <m-pro-item v-for="(item,index) of proInfo.goods" :key="index" :good-info="item"/>
     </div>

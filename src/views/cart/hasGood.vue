@@ -31,7 +31,7 @@
                   <a href="javascript:;" class="icon select-icon" :class="item2.isSelect ? 'icon-check-active' : 'icon-check'" @click="chooseItem(item2)"></a>
                 </div>
                 <div class="image">
-                  <img :src="item2.img">
+                  <img :src="imgBaseURL + item2.img">
                 </div>
                 <div class="name">
                   <div class="vertical-wrap">
@@ -74,7 +74,7 @@
             ￥{{getTotalPrice}}
           </span>
         </div>
-        <span class="checkout fr">去结算</span>
+        <span class="checkout fr" @click="goBuy">去结算</span>
       </div>
       <m-modal v-if="openDelete" @close="openDelete=false" @sureDelete="sureDelete($event)" :y="deleteElementY"/>
     </div>
@@ -83,82 +83,10 @@
 <script>
 import { resetArr, cartList } from '../../lib/util'
 import MModal from './modal'
+import { mapState, mapMutations } from 'vuex'
 export default {
   data () {
     return {
-      orderList: [{
-        name: '每晚亲肤水洗棉四件套',
-        img: 'http://img.youpin.mi-img.com/800_pic/558_2097_eggk63d41d1w.png@base@tag=imgScale&h=350&w=350&et=1&eth=480&etw=480&etc=FFFFFF?t=webp',
-        id: 1,
-        parentName: '有品精选',
-        color: '水玉色',
-        size: '1.5m',
-        meal: '尊贵',
-        price: 299,
-        count: 1,
-        isSelect: true,
-        money: '￥'
-      }, {
-        name: 'SmileyWorld联名金尾小白鞋',
-        img: 'https://img.youpin.mi-img.com/800_pic/1e8658dbd6dfeca7f2dc09ef575d8e9c.png@base@tag=imgScale&h=350&w=350&et=1&eth=480&etw=480&etc=FFFFFF?t=webp',
-        id: 2,
-        parentName: '小米自营',
-        color: '水玉色',
-        size: '40码',
-        meal: '',
-        price: 199,
-        count: 2,
-        isSelect: false,
-        money: '￥'
-      }, {
-        name: 'SmileyWorld联名金尾小白鞋',
-        img: 'https://img.youpin.mi-img.com/800_pic/1e8658dbd6dfeca7f2dc09ef575d8e9c.png@base@tag=imgScale&h=350&w=350&et=1&eth=480&etw=480&etc=FFFFFF?t=webp',
-        id: 2,
-        parentName: '小米自营',
-        color: '水玉色',
-        size: '40码',
-        meal: '',
-        price: 199,
-        count: 2,
-        isSelect: false,
-        money: '￥'
-      }, {
-        name: 'SmileyWorld联名金尾小白鞋',
-        img: 'https://img.youpin.mi-img.com/800_pic/1e8658dbd6dfeca7f2dc09ef575d8e9c.png@base@tag=imgScale&h=350&w=350&et=1&eth=480&etw=480&etc=FFFFFF?t=webp',
-        id: 2,
-        parentName: '成人用品',
-        color: '水玉色',
-        size: '40码',
-        meal: '',
-        price: 199,
-        count: 2,
-        isSelect: false,
-        money: '￥'
-      }, {
-        name: 'SmileyWorld联名金尾小白鞋',
-        img: 'https://img.youpin.mi-img.com/800_pic/1e8658dbd6dfeca7f2dc09ef575d8e9c.png@base@tag=imgScale&h=350&w=350&et=1&eth=480&etw=480&etc=FFFFFF?t=webp',
-        id: 2,
-        parentName: '鞋靴箱包',
-        color: '水玉色',
-        size: '40码',
-        meal: '',
-        price: 199,
-        count: 2,
-        isSelect: false,
-        money: '￥'
-      }, {
-        name: 'SmileyWorld联名金尾小白鞋',
-        img: 'https://img.youpin.mi-img.com/800_pic/1e8658dbd6dfeca7f2dc09ef575d8e9c.png@base@tag=imgScale&h=350&w=350&et=1&eth=480&etw=480&etc=FFFFFF?t=webp',
-        id: 2,
-        parentName: '居家用品',
-        color: '水玉色',
-        size: '40码',
-        meal: '',
-        price: 199,
-        count: 2,
-        isSelect: false,
-        money: '￥'
-      }],
       goodsLists: {}, // 筛选后的商品列表
       allBox: true, // 全选
       openDelete: false, // 删除界面,
@@ -170,33 +98,64 @@ export default {
     }
   },
   created () {
-    let arr = resetArr(this.orderList, 'parentName')
-    this.goodsLists = cartList(arr, this.orderList, 'parentName')
+    let arr = resetArr(this.cart, 'parentName')
+    this.goodsLists = cartList(arr, this.cart, 'parentName')
   },
   methods: {
+    ...mapMutations(['deleteCartItem', 'setCartSave', 'setCartCount']),
     chooseList (info, bool) { // 父类选择
       for (let item of info) {
-        item.isSelect = !bool
-      }
-    },
-    chooseItem (item2) { // 单个商品选择
-      item2.isSelect = !item2.isSelect
-    },
-    chooseAll (bool) { // 全选
-      for (let i in this.goodsLists) {
-        for (let item of this.goodsLists[i].list) {
-          item.isSelect = !bool
+        // item.isSelect = !bool
+        for (let i in this.cart) {
+          if (this.cart[i].id === item.id) {
+            this.cart[i].isSelect = !bool
+          }
         }
       }
+      this.setCartSave(this.cart)
+    },
+    chooseItem (item2) { // 单个商品选择
+      // item2.isSelect = !item2.isSelect
+      for (let p of this.cart) {
+        if (p.id === item2.id) {
+          p.isSelect = !p.isSelect
+        }
+      }
+      this.setCartSave(this.cart)
+    },
+    chooseAll (bool) { // 全选
+      // for (let i in this.goodsLists) {
+      //   for (let item of this.goodsLists[i].list) {
+      //     item.isSelect = !bool
+      //   }
+      // }
+      for (let item of this.cart) {
+        item.isSelect = !bool
+      }
+      this.setCartSave(this.cart)
     },
     reduce (pro) {
       if (parseInt(pro.count) === 1) {
         return
       }
       pro.count--
+      for (let item of this.cart) {
+        if (item.id === pro.id) {
+          item.count = pro.count
+        }
+      }
+      this.setCartSave(this.cart)
+      this.setCartCount(this.cart)
     },
     add (pro) {
       pro.count++
+      for (let item of this.cart) {
+        if (item.id === pro.id) {
+          item.count = pro.count
+        }
+      }
+      this.setCartSave(this.cart)
+      this.setCartCount(this.cart)
     },
     showDelete (list, i, e) { // 删除界面
       this.deleteElementY = e.pageY
@@ -204,8 +163,15 @@ export default {
       this.deleteIndex = i
       this.openDelete = true
     },
-    sureDelete () { // 确定删除是触发
+    sureDelete () { // 确定删除时触发
+      for (let i in this.cart) {
+        if (this.cart[i].id === this.deleteList[this.deleteIndex].id) {
+          this.cart.splice(i, 1)
+        }
+      }
+      this.deleteCartItem(this.cart) // 删除后保存更新cart
       this.deleteList.splice(this.deleteIndex, 1)
+      this.setCartCount(this.cart)
     },
     showFreight (index) { // 运费信息展示
       this.$refs.freight[index.substring(4)].className = 'layer'
@@ -222,9 +188,16 @@ export default {
       if (this.totalScrollTop - scroll < innerHeight) {
         this.isfixed = false
       }
+    },
+    goBuy () { // 结算
+      let res = this.cart.some(item => {
+        return item.isSelect === true
+      })
+      if (res) this.$router.push('/checkout')
     }
   },
   computed: {
+    ...mapState(['cart']),
     checkList () { // 父级选择
       return function (info) {
         return info.every((item) => {
@@ -233,16 +206,18 @@ export default {
       }
     },
     checkAll () { // 全选
-      let a = []
-      for (let i in this.goodsLists) {
-        a[i] = this.goodsLists[i].list.every((item) => {
+      // let a = []
+      // for (let i in this.goodsLists) {
+      /* a[i] = this.goodsLists[i].list.every((item) => {
           return item.isSelect === true
         })
         if (a[i] !== true) {
           return false
-        }
-      }
-      return true
+        } */
+      return this.cart.every((item) => {
+        return item.isSelect === true
+      })
+      // return true
     },
     getTotalPrice () { // 商品总价
       let totalPrice = 0

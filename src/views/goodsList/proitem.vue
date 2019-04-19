@@ -1,5 +1,5 @@
 <template>
-  <div class="m-pro-item">
+  <div class="m-pro-item" @click="goDetail">
     <div class="pro-img">
       <img :src="imgBaseURL + goodInfo.head_imgs">
     </div>
@@ -15,7 +15,12 @@
 
 <script>
 export default {
-  props: ['goodInfo']
+  props: ['goodInfo'],
+  methods: {
+    goDetail () {
+      this.$router.push(`/detail/${this.goodInfo.type_id}/${this.goodInfo.id}`)
+    }
+  }
 }
 </script>
 

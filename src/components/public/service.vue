@@ -72,8 +72,9 @@ export default {
   },
   methods: {
     toTop () {
+      clearTimeout(this.timer)
       this.timer = setInterval(() => {
-        this.scroll -= 50
+        this.scroll -= 300
         document.documentElement.scrollTop = this.scroll
       }, 10)
     },

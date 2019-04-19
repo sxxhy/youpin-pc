@@ -1,15 +1,15 @@
 <template>
   <div class="m-banner clearfix">
     <div class="main fl">
-      <img :src="bannerList[0]" ref="headImg">
+      <img :src="bannerList ? imgBaseURL + bannerList[imgIndex] : ''" ref="headImg">
     </div>
     <div class="thumb fr">
       <div class="thumb-container" ref="thumb">
-        <div class="thumb-pic" v-for="(item,index) of bannerList" :key="index" @click='getImg(index)' :class="imgIndex===index ? 'active' : ''">
-          <img :src="item">
+        <div class="thumb-pic" v-for="(item,index) of bannerList" :key="index" @click='getImg(index,$event)' :class="imgIndex===index ? 'active' : ''">
+          <img :src="imgBaseURL + item">
         </div>
       </div>
-      <div class="thumb-arrow-up" @click="arrowUp()">
+      <div class="thumb-arrow-up" @click="arrowUp($event)">
         <a href="javascript:;" class="icon"></a>
       </div>
       <div class="thumb-arrow-down" @click="arrowDown()">
@@ -23,29 +23,36 @@
 export default {
   data () {
     return {
-      bannerList: [
-        'https://img.youpin.mi-img.com/goods/ab17b8de9146da039da640969907dd6c.jpg?_s=ks3',
-        'https://img.youpin.mi-img.com/goods/f010ac70bbb0eebbc0865eac01a02068.jpg?_s=ks3',
-        'https://img.youpin.mi-img.com/goods/f8b75d21560638fecd9cd598a1af80ad.jpg?_s=ks3',
-        'https://img.youpin.mi-img.com/goods/e70dadca7e0de818aa4ccbb10299d37c.jpg?_s=ks3',
-        'https://img.youpin.mi-img.com/goods/519728072fd6c45c5a32ac0d3a274b61.jpg?_s=ks3',
-        'https://img.youpin.mi-img.com/goods/cbfdf9559d03dec1aff5d986785e7e1e.jpg?_s=ks3'
-      ],
-      imgIndex: 0
+      imgIndex: 0,
+      trans: 0
     }
   },
   methods: {
-    getImg (i) {
+    getImg (i, e) {
+      if (i === this.imgIndex) return
       this.imgIndex = i
       this.$refs.headImg.src = this.bannerList[i]
+      var ele = e.target
+      var num = (Math.ceil(ele.offsetTop - this.trans)) / 94
+      if (num === 3 && parseInt(i) !== this.bannerList.length - 1) {
+        console.log(ele.offsetTop)
+        this.trans = (i - 2) * 94
+        this.$refs.thumb.style.transform = `translate3d(0,-${this.trans}px,0)`
+      }
+      if (Math.ceil(ele.offsetTop) - this.trans === 0 && this.trans !== 0) {
+        this.trans = this.trans - 94
+        this.$refs.thumb.style.transform = `translate3d(0, -${this.trans}px, 0)`
+      }
     },
-    arrowUp () {
+    arrowUp (e) {
       if (this.imgIndex === 0) {
         return
       }
       this.imgIndex--
-      if (this.bannerList.length - this.imgIndex >= 3) {
-        this.$refs.thumb.style.transform = `translate3d(0,${(this.imgIndex - 2) * 94}px,0)`
+      var ele = document.querySelector('.thumb-pic.active')
+      if (Math.ceil(ele.offsetTop) - this.trans === 94 && this.trans !== 0) {
+        this.trans = this.trans - 94
+        this.$refs.thumb.style.transform = `translate3d(0, -${this.trans}px, 0)`
       }
     },
     arrowDown () {
@@ -53,11 +60,15 @@ export default {
         return
       }
       this.imgIndex++
-      if (this.bannerList.length - this.imgIndex >= 3) {
-        this.$refs.thumb.style.transform = `translate3d(0,-${(this.bannerList.length - this.imgIndex) * 94}px,0)`
+      var ele = document.querySelector('.thumb-pic.active')
+      var num = (Math.ceil(ele.offsetTop - this.trans)) / 94
+      if (num === 2 && this.imgIndex !== this.bannerList.length - 1) {
+        this.trans = (this.imgIndex - 2) * 94
+        this.$refs.thumb.style.transform = `translate3d(0,-${this.trans}px,0)`
       }
     }
-  }
+  },
+  props: ['bannerList']
 }
 </script>
 
@@ -91,7 +102,7 @@ export default {
       position: absolute;
       top: 0;
       left: 0;
-      transition: top .3s ease;
+      transition: transform .3s ease;
       .thumb-pic
         width: 83px;
         height: 83px;
@@ -100,6 +111,7 @@ export default {
         background-color: #f4f4f4;
         // transition: border .5s cubic-bezier(0,1,.5,1);
         cursor: pointer;
+        box-sizing: border-box;
         &.active
           border-style: solid;
         img

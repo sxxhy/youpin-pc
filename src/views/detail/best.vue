@@ -103,12 +103,12 @@ export default {
     overflow: hidden;
     cursor: pointer;
     .img
-      width: 260px;
-      height: 197px;
+      padding: 22px 53px;
+      width: 154px;
+      height: 153px;
       text-align: center;
       background-color: #fff;
       overflow: hidden;
-      padding: 22px 53px;
       img
         height: 154px;
         width: 154px;

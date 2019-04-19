@@ -10,7 +10,7 @@
         </span>
       </div>
     </div>
-    <div class="content" v-if="false">
+    <div class="content" v-if="cart.length === 0">
       <div class="no-good-container">
         <div class="no-cart">
           <div class="img"></div>
@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="content" v-if="true">
+    <div class="content" v-if="cart.length !== 0">
       <m-has-good/>
     </div>
     <div class="recommend-container">
@@ -40,6 +40,7 @@
 <script>
 import MGuessLike from './guessLike'
 import MHasGood from './hasGood'
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
@@ -104,6 +105,9 @@ export default {
   components: {
     MGuessLike,
     MHasGood
+  },
+  computed: {
+    ...mapState(['cart'])
   }
 }
 </script>

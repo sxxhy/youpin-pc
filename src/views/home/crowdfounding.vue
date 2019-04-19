@@ -56,9 +56,6 @@ export default {
   components: {
     MProgress
   },
-  created () {
-    console.log(this.index)
-  },
   props: ['index']
 }
 </script>

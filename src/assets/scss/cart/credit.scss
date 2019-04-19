@@ -1,0 +1,98 @@
+.m-credit {
+  -webkit-perspective: 600;
+  perspective: 600;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,.5);
+  z-index: 999;
+  .modal {
+    width: 530px;
+    height: 360px;
+    margin-left: -330px;
+    margin-top: -282.5px;
+    overflow: hidden;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    border: none;
+    .modal-data {
+      background-color: #fff;
+      z-index: 1000;
+      opacity: 1;
+      text-align: center;
+      form {
+        padding: 0 30px;
+        .form-row {
+          margin-top: 10px;
+        }
+      }
+      .title {
+        background: #fff;
+        margin-top: 20px;
+        height: 60px;
+        .mark {
+          margin-left: 25px;
+          line-height: 60px;
+          font-size: 19px;
+          float: left;
+        }
+        .close {
+          margin-right: 30px;
+          margin-top: 20px;
+          float: right;
+          .icon {
+            width: 13px;
+            height: 13px;
+            background-position: 0 -119px;
+          }
+        }
+      }
+      .btn {
+        width: 50%;
+        height: 50px;
+        outline: none;
+        border-radius: 16px;
+        background-color: #845f3f;
+        margin-top: 30px;
+        color: #fff;
+      }
+      &/deep/ #card-errors {
+        height: 18px;
+        color: red;
+        margin-top: 10px;
+      }
+    }
+  }
+}
+
+.StripeElement {
+  box-sizing: border-box;
+
+  height: 40px;
+
+  padding: 10px 12px;
+
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: white;
+
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}

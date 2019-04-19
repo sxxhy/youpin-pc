@@ -1,5 +1,5 @@
 <template>
-  <div class="m-search clearfix" :class="{ 'fixed': scroll>370, 'animation': scroll>200 && scroll<370 }">
+  <div class="m-search clearfix" :class="{ 'fixed': scroll>400, 'animation': scroll>200 && scroll<400 }">
     <div class="content clearfix">
       <div class="logo fl"></div>
       <div class="nav-part fl">
@@ -16,7 +16,8 @@
         <li class="tab-item fl">星品驾到</li>
       </ul>
       <div class="card fr">
-        <a href="#" class="link icon"></a>
+        <a href="#" class="link icon" @click="goCart"></a>
+        <span class="cart-news" v-if="cartCount > 0">{{cartCount}}</span>
       </div>
       <div class="search fr" :class="isFocus ? 'active' : ''">
         <div class="search-form">
@@ -31,6 +32,7 @@
 </template>
 <script>
 import MMenu from './menu'
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
@@ -45,10 +47,16 @@ export default {
     scrollTop () {
       var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
       this.scroll = scrollTop
+    },
+    goCart () {
+      this.$router.push('/cart')
     }
   },
   components: {
     MMenu
+  },
+  computed: {
+    ...mapState(['cartCount'])
   }
 }
 </script>
@@ -136,6 +144,18 @@ export default {
       position: absolute;
       right: 6px;
       top: 18px;
+      .cart-news
+        position: absolute;
+        right: -6px;
+        top: -3px;
+        width: 21px;
+        border-radius: 8px;
+        line-height: 17px;
+        display: block;
+        text-align: center;
+        color: #fff;
+        font-size: 12px;
+        background-color: #c00000;
       .link
         position: relative;
         width: 30px;

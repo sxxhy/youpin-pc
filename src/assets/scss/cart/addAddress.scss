@@ -104,16 +104,27 @@
             outline: none;
           }
         }
+        select {
+          color: #666;
+        }
         .input-box2 {
           margin-top: 10px;
           margin-left: 20px;
           margin-right: 20px;
           overflow: hidden;
-          .input, textarea {
+          .input, textarea{
             padding: 10px;
             margin: 5px;
             font-size: 14px;
             width: 605px;
+            box-sizing: border-box;
+            border: 1px solid #eee;
+          }
+          #area, #city {
+            padding: 10px;
+            margin: 5px;
+            font-size: 14px;
+            width: 200px;
             box-sizing: border-box;
             border: 1px solid #eee;
           }
@@ -123,11 +134,11 @@
           margin-left: 20px;
           margin-right: 20px;
           overflow: hidden;
-          .input {
+          #email, input {
             padding: 10px;
             margin: 5px;
             font-size: 14px;
-            width: 297px;
+            width: 200px;
             -webkit-box-sizing: border-box;
             box-sizing: border-box;
             border: 1px solid #eee;

@@ -21,7 +21,7 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "category" */ '../views/goodsList/index.vue')
     },
     {
-      path: '/detail/:id',
+      path: '/detail/:tid/:id',
       name: 'detail',
       component: () => import(/* webpackChunkName: "detail" */ '../views/detail/index.vue')
     },
@@ -34,6 +34,11 @@ const router = new Router({
       path: '/checkout',
       name: 'checkout',
       component: () => import(/* webpackChunkName: "order" */ '../views/cart/order.vue')
+    },
+    {
+      path: '/finishorder',
+      name: 'finishorder',
+      component: () => import(/* webpackChunkName: "finishOrder" */ '../views/cart/finishOrder.vue')
     }
   ]
 })

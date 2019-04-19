@@ -7,7 +7,11 @@ export default new Vuex.Store({
   state: {
     siteInfo: '',
     language: '',
-    classInfo: ''
+    classInfo: '',
+    cartCount: 0,
+    cart: [],
+    address: [],
+    orderInfo: ''
   },
   mutations: {
     setSite (state, data) {
@@ -18,6 +22,25 @@ export default new Vuex.Store({
     },
     setSiteClass (state, data) {
       state.classInfo = data
+    },
+    setCartCount (state, data) {
+      let count = 0
+      for (let item of data) {
+        count += item.count
+      }
+      state.cartCount = count
+    },
+    setCart (state, data) {
+      state.cart.push(data)
+    },
+    setCartSave (state, cart) { // 修改保存
+      state.cart = cart
+    },
+    deleteCartItem (state, data) {
+      state.cart = data
+    },
+    setAddress (state, data) {
+      state.address = data
     }
   },
   actions: {

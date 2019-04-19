@@ -4,7 +4,7 @@
       <m-menu/>
       <m-banner :banner-list="homeInfo.banner"/>
     </div>
-    <m-hero/>
+<!--    <m-hero/>-->
     <m-section>
       <div slot="mHContainer">
         <m-crowdfounding/>
@@ -22,7 +22,7 @@
 <script>
 import MMenu from '../../components/public/menu'
 import MBanner from './banner'
-import MHero from './hero'
+// import MHero from './hero'
 import MSection from './section'
 import MCrowdfounding from './crowdfounding'
 import MNewGoods from './newGoods'
@@ -37,7 +37,7 @@ export default {
   components: {
     MMenu,
     MBanner,
-    MHero,
+    // MHero,
     MSection,
     MCrowdfounding,
     MNewGoods,

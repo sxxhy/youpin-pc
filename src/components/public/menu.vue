@@ -16,7 +16,7 @@
         <p class="title">{{item.name}}</p>
         <ul class="detail-list">
           <li class="detail-item" v-for="(item1,index) of item.subclass" :key="index">
-            <a :href="`/category/${item.id}#secondId${item1.id}`">
+            <a :href="`/category/${item.id}`">
               <img :src="imgBaseURL + item1.class_img">
               <span>{{item1.name}}</span>
             </a>
@@ -65,10 +65,9 @@ export default {
   position: relative;
   height: 358px;
   background-color: #845f3f;
-  padding: 10px 0;
   width: 221px;
   float: left;
-  z-index: 2;
+  z-index: 10;
   .menu-list
     overflow: hidden;
     overflow-y: scroll;

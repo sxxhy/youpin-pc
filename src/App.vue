@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <m-header/>
+<!--    <m-header/>-->
     <m-search/>
     <router-view/>
     <m-footer/>
@@ -29,12 +29,15 @@ export default {
       this.setSiteClass(data.site_class)
       this.setLanguage(data.lang)
     }
+    if (this.cart.length > 0) {
+      this.setCartCount(this.cart)
+    }
   },
   methods: {
-    ...mapMutations(['setSite', 'setSiteClass', 'setLanguage'])
+    ...mapMutations(['setSite', 'setSiteClass', 'setLanguage', 'setCartCount'])
   },
   computed: {
-    ...mapState(['language']),
+    ...mapState(['language', 'cart']),
     lang () {
       return function (str) {
         return this.language ? this.language[str] : ''

@@ -24,21 +24,31 @@
             </div>
             <div class="input-box2">
               <div class="input-u">
-                <input type="text" placeholder="选择省／市／区／街道" class="input" :class="checkMsg.addrMsg!=='' ? 'error' : ''">
+                <select name="" id="city" @change="getArea" v-model="addressInfo.city">
+                  <option value="">- - 请选择城市 - -</option>
+                  <option :value="item.city" v-for="(item,index) of citys" :key="index">{{item.city}}</option>
+                </select>
+                <select name="" id="area" @change="getPostCode" v-model="addressInfo.area">
+                  <option value="">- - 请选择地区 - -</option>
+                  <option :value="item.area" v-for="(item,index) of areas" :key="index">{{item.area}}</option>
+                </select>
                 <a href="javascript:;" class="icon icon-error" v-if="checkMsg.addrMsg!==''"></a>
                 <div class="hint error">{{checkMsg.addrMsg}}</div>
+              </div>
+            </div>
+            <div class="input-box3">
+              <div class="input-u">
+                <select name="" id="email" @change="getArea" v-model="addressInfo.postCode">
+                  <option value="">- - 请选择邮编 - -</option>
+                  <option :value="item.postcode" v-for="(item,index) of postcodes" :key="index">{{item.postcode}}</option>
+                </select>
+                <input type="text" v-model="addressInfo.email" placeholder="邮箱(选填)">
               </div>
             </div>
             <div class="input-box2">
               <div class="input-u">
                 <textarea type="text" placeholder="详细地址" class="default" v-model="addressInfo.detailedAddr" @blur="checkDetailAddr" :class="checkMsg.detailedAddrMsg!=='' ? 'error' : ''"></textarea>
                 <div class="hint error">{{checkMsg.detailedAddrMsg}}</div>
-              </div>
-            </div>
-            <div class="input-box3">
-              <div class="input-u">
-                <input type="text" placeholder="邮政编号" class="input" v-model="addressInfo.postalCode" @blur="checkPostalCode" :class="checkMsg.postalCodeMsgs!=='' ? 'error' : ''">
-                <div class="hint error">{{checkMsg.postalCodeMsg}}</div>
               </div>
             </div>
             <div class="submit-box">
@@ -52,18 +62,21 @@
 </template>
 
 <script>
+import postCode from '../../lib/postcode'
+import { mapState } from 'vuex'
 export default {
   data () {
     return {
       addressInfo: {
         name: '', // 姓名
         tel: '', // 电话
-        province: '', // 省
         city: '', // 市
-        district: '', // 区
+        area: '', // 区
         street: '', // 街道
         detailedAddr: '', // 详细地址
-        postalCode: ''
+        postCode: '',
+        email: '',
+        isSelect: false
       },
       checkMsg: { // 提示信息
         nameMsg: '',
@@ -72,7 +85,10 @@ export default {
         detailedAddrMsg: '',
         postalCodeMsg: ''
       },
-      editORadd: true // 编辑地址还是增加地址
+      editORadd: true, // 编辑地址还是增加地址,
+      citys: '',
+      areas: '',
+      postcodes: ''
     }
   },
   methods: {
@@ -109,14 +125,26 @@ export default {
         this.$emit('saveAddress', this.addressInfo, this.editORadd)
         this.$emit('close')
       }
+    },
+    getArea () {
+      this.areas = postCode.get('฿', this.addressInfo.city, 'area')
+    },
+    getPostCode () {
+      this.postcodes = this.areas.filter(item => {
+        return item.area === this.addressInfo.area
+      })[0].postcode
     }
   },
   props: ['editAddrInfo'],
-  created () {
+  computed: {
+    ...mapState(['siteInfo'])
+  },
+  async created () {
     if (this.editAddrInfo !== undefined) {
       this.addressInfo = this.editAddrInfo
       this.editORadd = true
     } else this.editORadd = false
+    this.citys = await postCode.load('฿')
   }
 }
 </script>
